@@ -1,13 +1,18 @@
-[gd_scene load_steps=5 format=3 uid="uid://kwvysa3d2cxv"]
+[gd_scene load_steps=8 format=3 uid="uid://kwvysa3d2cxv"]
 
 [ext_resource type="Texture2D" uid="uid://c80d2jq2ho1ls" path="res://Assets/Background.png" id="1_2qg2v"]
 [ext_resource type="FontFile" uid="uid://dlroljs5iwx6g" path="res://Assets/prstart.ttf" id="2_37rc7"]
+[ext_resource type="Texture2D" uid="uid://bndxnekelc0qm" path="res://Assets/swordskeleton.png" id="3_n0oki"]
+[ext_resource type="Texture2D" uid="uid://p5uc7lobxxkc" path="res://Assets/valkyrie.png" id="4_k7ajk"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c1hx5"]
 bg_color = Color(0.0235294, 0.0352941, 0.0980392, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1dv6i"]
 bg_color = Color(0.0235294, 0.0392157, 0.180392, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_chqmm"]
+size = Vector2(17, 20)
 
 [node name="Main" type="Node"]
 
@@ -100,3 +105,26 @@ theme_override_font_sizes/font_size = 10
 theme_override_styles/hover = SubResource("StyleBoxFlat_c1hx5")
 theme_override_styles/normal = SubResource("StyleBoxFlat_1dv6i")
 text = "Combat Action Display Name"
+
+[node name="Player" type="Area2D" parent="."]
+position = Vector2(164, 176)
+scale = Vector2(4, 4)
+
+[node name="Sprite" type="Sprite2D" parent="Player"]
+texture = ExtResource("4_k7ajk")
+flip_h = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+position = Vector2(0.5, 0)
+shape = SubResource("RectangleShape2D_chqmm")
+
+[node name="Enemy" type="Area2D" parent="."]
+position = Vector2(760, 176)
+scale = Vector2(4, 4)
+
+[node name="Sprite" type="Sprite2D" parent="Enemy"]
+texture = ExtResource("3_n0oki")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy"]
+position = Vector2(0.5, 0)
+shape = SubResource("RectangleShape2D_chqmm")
