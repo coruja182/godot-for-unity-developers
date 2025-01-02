@@ -1,9 +1,14 @@
-[gd_scene load_steps=8 format=3 uid="uid://kwvysa3d2cxv"]
+[gd_scene load_steps=13 format=3 uid="uid://kwvysa3d2cxv"]
 
 [ext_resource type="Texture2D" uid="uid://c80d2jq2ho1ls" path="res://Assets/Background.png" id="1_2qg2v"]
 [ext_resource type="FontFile" uid="uid://dlroljs5iwx6g" path="res://Assets/prstart.ttf" id="2_37rc7"]
+[ext_resource type="Script" path="res://Scripts/character.gd" id="3_ifcqa"]
 [ext_resource type="Texture2D" uid="uid://bndxnekelc0qm" path="res://Assets/swordskeleton.png" id="3_n0oki"]
+[ext_resource type="Script" path="res://Resources/combat_action.gd" id="4_i2pdl"]
 [ext_resource type="Texture2D" uid="uid://p5uc7lobxxkc" path="res://Assets/valkyrie.png" id="4_k7ajk"]
+[ext_resource type="Resource" uid="uid://celn1j1gchx1h" path="res://Resources/basic_hit.tres" id="5_j3vbv"]
+[ext_resource type="Resource" uid="uid://bnedsb7a8m74x" path="res://Resources/heal.tres" id="6_cdcqn"]
+[ext_resource type="Resource" uid="uid://bd5614q2nki0h" path="res://Resources/fire_ball.tres" id="7_y60ir"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c1hx5"]
 bg_color = Color(0.0235294, 0.0352941, 0.0980392, 1)
@@ -106,9 +111,13 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_c1hx5")
 theme_override_styles/normal = SubResource("StyleBoxFlat_1dv6i")
 text = "Combat Action Display Name"
 
-[node name="Player" type="Area2D" parent="."]
+[node name="Player" type="Area2D" parent="." node_paths=PackedStringArray("oponnent")]
 position = Vector2(164, 176)
 scale = Vector2(4, 4)
+script = ExtResource("3_ifcqa")
+combat_actions = Array[ExtResource("4_i2pdl")]([ExtResource("5_j3vbv"), ExtResource("6_cdcqn"), ExtResource("7_y60ir")])
+oponnent = NodePath("../Enemy")
+is_player = true
 
 [node name="Sprite" type="Sprite2D" parent="Player"]
 texture = ExtResource("4_k7ajk")
@@ -118,9 +127,15 @@ flip_h = true
 position = Vector2(0.5, 0)
 shape = SubResource("RectangleShape2D_chqmm")
 
-[node name="Enemy" type="Area2D" parent="."]
+[node name="Enemy" type="Area2D" parent="." node_paths=PackedStringArray("oponnent", "character")]
 position = Vector2(760, 176)
 scale = Vector2(4, 4)
+script = ExtResource("3_ifcqa")
+combat_actions = Array[ExtResource("4_i2pdl")]([ExtResource("5_j3vbv"), ExtResource("6_cdcqn"), ExtResource("7_y60ir")])
+oponnent = NodePath("../Player")
+character = NodePath(".")
+current_health = 15
+max_health = 15
 
 [node name="Sprite" type="Sprite2D" parent="Enemy"]
 texture = ExtResource("3_n0oki")
