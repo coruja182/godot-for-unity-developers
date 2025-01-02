@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="CombatAction" load_steps=2 format=3 uid="uid://celn1j1gchx1h"]
+
+[ext_resource type="Script" path="res://Resources/combat_action.gd" id="1_jqcvi"]
+
+[resource]
+script = ExtResource("1_jqcvi")
+display_name = "Basic Hit (5 Damage)"
+action_type = 0
+damage = 5
+heal_amount = 0
