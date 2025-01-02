@@ -24,15 +24,15 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
-	if global_position == oponnent.global_position:
-		attack_oponent = false
-	
 	if attack_oponent:
 		global_position = global_position.move_toward(oponnent.global_position, delta * attack_speed)
 
 	if !attack_oponent:
 		global_position = global_position.move_toward(start_position, delta * attack_speed * 0.75)
 
+	if attack_oponent and global_position == oponnent.global_position:
+		attack_oponent = false
+		get_parent().end_turn()
 
 
 func cast_combat_action(combat_action : CombatAction) -> void:

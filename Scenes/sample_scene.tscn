@@ -1,9 +1,11 @@
-[gd_scene load_steps=13 format=3 uid="uid://kwvysa3d2cxv"]
+[gd_scene load_steps=15 format=3 uid="uid://kwvysa3d2cxv"]
 
 [ext_resource type="Texture2D" uid="uid://c80d2jq2ho1ls" path="res://Assets/Background.png" id="1_2qg2v"]
+[ext_resource type="Script" path="res://Scripts/ui.gd" id="1_rcqsh"]
 [ext_resource type="FontFile" uid="uid://dlroljs5iwx6g" path="res://Assets/prstart.ttf" id="2_37rc7"]
 [ext_resource type="Script" path="res://Scripts/character.gd" id="3_ifcqa"]
 [ext_resource type="Texture2D" uid="uid://bndxnekelc0qm" path="res://Assets/swordskeleton.png" id="3_n0oki"]
+[ext_resource type="Script" path="res://Scripts/turn_manager.gd" id="4_f624w"]
 [ext_resource type="Script" path="res://Resources/combat_action.gd" id="4_i2pdl"]
 [ext_resource type="Texture2D" uid="uid://p5uc7lobxxkc" path="res://Assets/valkyrie.png" id="4_k7ajk"]
 [ext_resource type="Resource" uid="uid://celn1j1gchx1h" path="res://Resources/basic_hit.tres" id="5_j3vbv"]
@@ -19,7 +21,9 @@ bg_color = Color(0.0235294, 0.0392157, 0.180392, 1)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_chqmm"]
 size = Vector2(17, 20)
 
-[node name="Main" type="Node"]
+[node name="Main" type="Node" node_paths=PackedStringArray("characters")]
+script = ExtResource("4_f624w")
+characters = [NodePath("Player"), NodePath("Enemy")]
 
 [node name="UI" type="Control" parent="."]
 layout_mode = 3
@@ -28,6 +32,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_rcqsh")
 
 [node name="BackgroundImage" type="TextureRect" parent="UI"]
 layout_mode = 0
@@ -111,22 +116,6 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_c1hx5")
 theme_override_styles/normal = SubResource("StyleBoxFlat_1dv6i")
 text = "Combat Action Display Name"
 
-[node name="Player" type="Area2D" parent="." node_paths=PackedStringArray("oponnent")]
-position = Vector2(164, 176)
-scale = Vector2(4, 4)
-script = ExtResource("3_ifcqa")
-combat_actions = Array[ExtResource("4_i2pdl")]([ExtResource("5_j3vbv"), ExtResource("6_cdcqn"), ExtResource("7_y60ir")])
-oponnent = NodePath("../Enemy")
-is_player = true
-
-[node name="Sprite" type="Sprite2D" parent="Player"]
-texture = ExtResource("4_k7ajk")
-flip_h = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
-position = Vector2(0.5, 0)
-shape = SubResource("RectangleShape2D_chqmm")
-
 [node name="Enemy" type="Area2D" parent="." node_paths=PackedStringArray("oponnent", "character")]
 position = Vector2(760, 176)
 scale = Vector2(4, 4)
@@ -141,5 +130,22 @@ max_health = 15
 texture = ExtResource("3_n0oki")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy"]
+position = Vector2(0.5, 0)
+shape = SubResource("RectangleShape2D_chqmm")
+
+[node name="Player" type="Area2D" parent="." node_paths=PackedStringArray("oponnent", "character")]
+position = Vector2(164, 176)
+scale = Vector2(4, 4)
+script = ExtResource("3_ifcqa")
+combat_actions = Array[ExtResource("4_i2pdl")]([ExtResource("5_j3vbv"), ExtResource("6_cdcqn"), ExtResource("7_y60ir")])
+oponnent = NodePath("../Enemy")
+is_player = true
+character = NodePath(".")
+
+[node name="Sprite" type="Sprite2D" parent="Player"]
+texture = ExtResource("4_k7ajk")
+flip_h = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
 position = Vector2(0.5, 0)
 shape = SubResource("RectangleShape2D_chqmm")

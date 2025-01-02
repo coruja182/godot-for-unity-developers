@@ -7,7 +7,7 @@ signal on_end_turn(character : Area2D)
 
 
 @export var characters : Array[Area2D]
-@export var next_turn_delay : float = 1.0
+@export var next_turn_delay : float = 2.0
 @export var current_character : Area2D
 
 var current_character_index : int = -1
@@ -28,7 +28,7 @@ func begin_next_turn() -> void:
 	emit_signal("on_begin_turn", current_character)
 
 
-func next_turn() -> void:
+func end_turn() -> void:
 	emit_signal("on_end_turn", current_character)
 	await get_tree().create_timer(next_turn_delay).timeout
 	begin_next_turn()
