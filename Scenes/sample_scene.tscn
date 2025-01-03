@@ -133,14 +133,13 @@ texture = ExtResource("3_n0oki")
 position = Vector2(0.5, 0)
 shape = SubResource("RectangleShape2D_chqmm")
 
-[node name="Player" type="Area2D" parent="." node_paths=PackedStringArray("oponnent", "character")]
+[node name="Player" type="Area2D" parent="." node_paths=PackedStringArray("oponnent")]
 position = Vector2(164, 176)
 scale = Vector2(4, 4)
 script = ExtResource("3_ifcqa")
 combat_actions = Array[ExtResource("4_i2pdl")]([ExtResource("5_j3vbv"), ExtResource("6_cdcqn"), ExtResource("7_y60ir")])
 oponnent = NodePath("../Enemy")
 is_player = true
-character = NodePath(".")
 
 [node name="Sprite" type="Sprite2D" parent="Player"]
 texture = ExtResource("4_k7ajk")
