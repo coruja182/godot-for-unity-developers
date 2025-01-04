@@ -7,7 +7,7 @@ signal on_end_turn(character : Area2D)
 
 
 @export var characters : Array[Area2D]
-@export var next_turn_delay : float = 2.0
+@export var next_turn_delay : float = 1.0
 @export var current_character : Area2D
 
 var current_character_index : int = -1

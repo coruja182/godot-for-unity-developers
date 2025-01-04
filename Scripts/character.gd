@@ -49,14 +49,18 @@ func _process(delta: float) -> void:
 		get_parent().end_turn()
 
 
-func cast_combat_action(combat_action : CombatAction) -> void:
-	current_combat_action = combat_action
-	if combat_action.damage	> 0:
+func cast_combat_action(p_combat_action : CombatAction) -> void:
+	current_combat_action = p_combat_action
+	if current_combat_action.damage	> 0:
 		attack_oponent = true
-	elif combat_action.projectile_scene:
-		pass
-	elif combat_action.heal_amount > 0:
-		heal(combat_action.heal_amount)
+	elif current_combat_action.projectile_scene != null:
+		var projectile_instance: Sprite2D = current_combat_action.projectile_scene.instantiate()
+		projectile_instance.initialize(oponnent, get_parent().end_turn)
+		get_parent().add_child(projectile_instance)
+		projectile_instance.position = position
+		projectile_instance.position = position
+	elif current_combat_action.heal_amount > 0:
+		heal(current_combat_action.heal_amount)
 		get_parent().end_turn()
 
 
@@ -82,7 +86,6 @@ func determine_combat_action() -> void:
 	if assigned_combat_action:
 		cast_combat_action(assigned_combat_action)
 	else:
-		print_debug("WARN: NO ACTION WAS COMPUTED")
 		get_parent().end_turn()
 
 
