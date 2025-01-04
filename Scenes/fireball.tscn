@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://cet738w8mqhls"]
+
+[ext_resource type="Texture2D" uid="uid://lum4j2vwjsxn" path="res://Assets/Circle.png" id="1_q04yw"]
+[ext_resource type="Script" path="res://Scripts/fireball.gd" id="2_ywcmr"]
+
+[node name="Fireball" type="Sprite2D"]
+modulate = Color(0.796078, 0.505882, 0.027451, 1)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_q04yw")
+script = ExtResource("2_ywcmr")

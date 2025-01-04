@@ -1,10 +1,12 @@
-[gd_resource type="Resource" script_class="CombatAction" load_steps=2 format=3 uid="uid://bd5614q2nki0h"]
+[gd_resource type="Resource" script_class="CombatAction" load_steps=3 format=3 uid="uid://bd5614q2nki0h"]
 
+[ext_resource type="PackedScene" uid="uid://cet738w8mqhls" path="res://Scenes/fireball.tscn" id="1_angwy"]
 [ext_resource type="Script" path="res://Resources/combat_action.gd" id="1_nie1o"]
 
 [resource]
 script = ExtResource("1_nie1o")
 display_name = "Fire Ball (3 Damage)"
 action_type = 0
-damage = 0
+damage = 3
+projectile_scene = ExtResource("1_angwy")
 heal_amount = 0

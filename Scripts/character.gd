@@ -24,6 +24,18 @@ func _ready() -> void:
 	get_parent().connect("on_begin_turn", on_character_begin_turn)
 
 
+func heal(p_amount : int) -> void:
+	# different from the instructor, instead of using conditionals I used clamp function
+	current_health = clamp(current_health + p_amount, 0, max_health)
+	emit_signal("on_health_change")
+
+
+func take_damage(p_amount : int) -> void:
+	# different from the instructor, instead of using conditionals I used clamp function
+	current_health = clamp(current_health - p_amount, 0, max_health)
+	emit_signal("on_health_change")
+
+
 func _process(delta: float) -> void:
 	if attack_oponent:
 		global_position = global_position.move_toward(oponnent.global_position, delta * attack_speed)
@@ -33,6 +45,7 @@ func _process(delta: float) -> void:
 
 	if attack_oponent and global_position == oponnent.global_position:
 		attack_oponent = false
+		oponnent.take_damage(current_combat_action.damage)
 		get_parent().end_turn()
 
 
@@ -43,10 +56,12 @@ func cast_combat_action(combat_action : CombatAction) -> void:
 	elif combat_action.projectile_scene:
 		pass
 	elif combat_action.heal_amount > 0:
-		pass
+		heal(combat_action.heal_amount)
+		get_parent().end_turn()
+
 
 func on_character_begin_turn(p_character : Character) -> void:
-	if character == p_character:
+	if character == p_character and not p_character.is_player:
 		determine_combat_action()
 
 
