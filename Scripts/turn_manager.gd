@@ -23,6 +23,9 @@ func begin_next_turn() -> void:
 
 	if current_character_index == characters.size():
 		current_character_index = 0
+
+	if game_over:
+		return
 		
 	current_character = characters[current_character_index]
 	emit_signal("on_begin_turn", current_character)

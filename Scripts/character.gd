@@ -34,14 +34,19 @@ func take_damage(p_amount : int) -> void:
 	# different from the instructor, instead of using conditionals I used clamp function
 	current_health = clamp(current_health - p_amount, 0, max_health)
 	emit_signal("on_health_change")
+	if current_health <= 0:
+		die()
 
 
-func _process(delta: float) -> void:
+func _process(delta: float) -> void:	
 	if attack_oponent:
 		global_position = global_position.move_toward(oponnent.global_position, delta * attack_speed)
 
 	if !attack_oponent:
 		global_position = global_position.move_toward(start_position, delta * attack_speed * 0.75)
+
+	if get_parent().game_over:
+		return
 
 	if attack_oponent and global_position == oponnent.global_position:
 		attack_oponent = false
@@ -104,3 +109,8 @@ func has_combat_action_of_type(type: CombatAction.Type) -> bool:
 func get_combat_action_of_type(type: CombatAction.Type) -> CombatAction:
 	var available_actions = combat_actions.filter(func(ca): return ca.action_type == type)
 	return available_actions[randi_range(0, available_actions.size()-1)]
+
+
+func die() -> void:
+	(get_parent() as TurnManager).game_over = true
+	queue_free()
