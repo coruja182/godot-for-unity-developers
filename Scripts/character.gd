@@ -5,13 +5,13 @@ class_name Character
 signal on_health_change
 signal on_die(character: Area2D)
 
+@export var hit_particles : PackedScene
 @export var combat_actions : Array[CombatAction]
 @export var oponnent : Area2D
 @export var is_player : bool
 @export var character : Area2D
 @export var current_health : int = 25
 @export var max_health : int = 25
-
 @export var attack_speed : int = 2500
 
 var start_position : Vector2
@@ -31,6 +31,11 @@ func heal(p_amount : int) -> void:
 
 
 func take_damage(p_amount : int) -> void:
+	var hit_particles_instance : CPUParticles2D = hit_particles.instantiate()
+	get_parent().add_child(hit_particles_instance)
+	hit_particles_instance.position = position
+	hit_particles_instance.emitting = true
+	
 	# different from the instructor, instead of using conditionals I used clamp function
 	current_health = clamp(current_health - p_amount, 0, max_health)
 	emit_signal("on_health_change")

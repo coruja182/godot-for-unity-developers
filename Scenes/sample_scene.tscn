@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://kwvysa3d2cxv"]
+[gd_scene load_steps=21 format=3 uid="uid://kwvysa3d2cxv"]
 
 [ext_resource type="Texture2D" uid="uid://c80d2jq2ho1ls" path="res://Assets/Background.png" id="1_2qg2v"]
 [ext_resource type="Script" path="res://Scripts/ui.gd" id="1_rcqsh"]
@@ -12,6 +12,7 @@
 [ext_resource type="Resource" uid="uid://bnedsb7a8m74x" path="res://Resources/heal.tres" id="6_cdcqn"]
 [ext_resource type="Resource" uid="uid://bd5614q2nki0h" path="res://Resources/fire_ball.tres" id="7_y60ir"]
 [ext_resource type="Script" path="res://Scripts/health_bar.gd" id="11_sol8k"]
+[ext_resource type="PackedScene" uid="uid://c38pu1bpwxf5h" path="res://Scenes/hit_particle.tscn" id="12_igp50"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c1hx5"]
 bg_color = Color(0.0235294, 0.0352941, 0.0980392, 1)
@@ -141,6 +142,7 @@ text = "Combat Action Display Name"
 position = Vector2(760, 176)
 scale = Vector2(4, 4)
 script = ExtResource("3_ifcqa")
+hit_particles = ExtResource("12_igp50")
 combat_actions = Array[ExtResource("4_i2pdl")]([ExtResource("5_j3vbv"), ExtResource("6_cdcqn"), ExtResource("7_y60ir")])
 oponnent = NodePath("../Player")
 character = NodePath(".")
@@ -199,6 +201,7 @@ vertical_alignment = 1
 position = Vector2(164, 176)
 scale = Vector2(4, 4)
 script = ExtResource("3_ifcqa")
+hit_particles = ExtResource("12_igp50")
 combat_actions = Array[ExtResource("4_i2pdl")]([ExtResource("5_j3vbv"), ExtResource("6_cdcqn"), ExtResource("7_y60ir")])
 oponnent = NodePath("../Enemy")
 is_player = true
