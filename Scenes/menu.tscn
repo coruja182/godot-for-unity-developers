@@ -1,0 +1,66 @@
+[gd_scene load_steps=4 format=3 uid="uid://cb48345mwcaey"]
+
+[ext_resource type="FontFile" uid="uid://dlroljs5iwx6g" path="res://Assets/prstart.ttf" id="1_ryj1c"]
+[ext_resource type="Script" path="res://Scripts/menu.gd" id="1_ucvkp"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_6fqhi"]
+load_path = "res://.godot/imported/Background.png-e8880a50f4091751eaed728281d3c21e.ctex"
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ucvkp")
+
+[node name="BackgroundImage" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("CompressedTexture2D_6fqhi")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -364.0
+offset_top = 79.0
+offset_right = 364.0
+offset_bottom = 108.0
+grow_horizontal = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("1_ryj1c")
+theme_override_font_sizes/font_size = 72
+text = "Micro RPG"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PlayButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -112.0
+offset_top = -31.5
+offset_right = 112.0
+offset_bottom = 31.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("1_ryj1c")
+theme_override_font_sizes/font_size = 54
+text = "Play"
+
+[connection signal="pressed" from="PlayButton" to="." method="_on_play_button_pressed"]
