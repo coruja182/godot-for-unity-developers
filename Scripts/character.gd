@@ -14,6 +14,7 @@ signal on_die(character: Area2D)
 @export var max_health : int = 25
 @export var attack_speed : int = 2500
 
+
 var start_position : Vector2
 var attack_oponent : bool
 var current_combat_action : CombatAction
@@ -74,6 +75,17 @@ func cast_combat_action(p_combat_action : CombatAction) -> void:
 		get_parent().end_turn()
 
 
+	play_audio(current_combat_action)
+
+
+func play_audio(p_combat_action: CombatAction):
+	match p_combat_action.display_name:
+		"Basic Hit (5 Damage)":
+			(get_parent() as TurnManager).hit_sound.play()
+		"Fire Ball (3 Damage)":
+			(get_parent() as TurnManager).fireball_sound.play()
+
+
 func on_character_begin_turn(p_character : Character) -> void:
 	if character == p_character and not p_character.is_player:
 		determine_combat_action()
@@ -117,5 +129,6 @@ func get_combat_action_of_type(type: CombatAction.Type) -> CombatAction:
 
 
 func die() -> void:
+	get_parent().death_sound.play()
 	(get_parent() as TurnManager).game_over = true
 	queue_free()

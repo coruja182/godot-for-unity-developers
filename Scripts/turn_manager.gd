@@ -5,6 +5,9 @@ class_name TurnManager
 signal on_begin_turn(character : Area2D)
 signal on_end_turn(character : Area2D)
 
+@onready var death_sound: AudioStreamPlayer = $DeathSound
+@onready var fireball_sound: AudioStreamPlayer = $FireballSound
+@onready var hit_sound: AudioStreamPlayer = $HitSound
 
 @export var characters : Array[Area2D]
 @export var next_turn_delay : float = 1.0
